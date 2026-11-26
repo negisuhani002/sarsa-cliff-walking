@@ -1,15 +1,15 @@
-# SARSA Cliff Walking using Reinforcement Learning
+# SARSA and Q-Learning using Reinforcement Learning
 
 ## Overview
-This project implements the **SARSA (State-Action-Reward-State-Action)** algorithm using Gymnasium's `CliffWalking-v1` environment.
+This project implements two Temporal Difference (TD) reinforcement learning algorithms, **SARSA** and **Q-Learning**, using Gymnasium's `CliffWalking-v1` environment.
 
-The project covers environment setup, Q-table initialization, ε-greedy action selection, SARSA learning, training, and evaluation of the learned policy.
+The project covers Q-table initialization, ε-greedy action selection, algorithm implementation, training, and evaluation of the learned policies.
 
 ## Environment
 - Environment: `CliffWalking-v1`
 - States: 48
 - Actions: 4 (Up, Right, Down, Left)
-- Q-table: 48 × 4
+- Q-table shape: 48 × 4
 - Goal: Reach the destination while avoiding the cliff
 
 ## Technologies Used
@@ -31,42 +31,41 @@ The project covers environment setup, Q-table initialization, ε-greedy action s
 - Discount factor (γ): 0.99
 - Exploration rate (ε): 0.1
 
-### 3. ε-greedy Policy
-Implemented an ε-greedy policy to balance exploration and exploitation.
+### 3. SARSA Implementation
+- Implemented the SARSA on-policy learning algorithm.
+- Used an ε-greedy policy for action selection.
+- Updated Q-values using the next action selected by the current policy.
 
-- Exploration: Select a random action.
-- Exploitation: Select the action with the highest Q-value.
+### 4. Q-Learning Implementation
+- Implemented the Q-Learning off-policy algorithm.
+- Used an ε-greedy policy during training.
+- Updated Q-values using the maximum Q-value of the next state.
 
-### 4. SARSA Training
-Implemented the SARSA update rule:
-
-\[
-Q(s,a) \leftarrow Q(s,a)+\alpha
-[r+\gamma Q(s',a')-Q(s,a)]
-\]
-
-The agent learns by interacting with the environment and updating its Q-values after each step.
-
-### 5. Agent Evaluation
-- Used the learned Q-table to select the highest-valued action at each state.
-- Evaluated the agent's learned behavior in the CliffWalking environment.
-- Tracked the total reward and episode length.
+### 5. Model Evaluation
+- Evaluated the trained agents using their learned Q-tables.
+- Selected the highest-valued action at each state during evaluation.
+- Recorded the total reward and episode length.
 
 ## Results
 
-**Total Reward: -17**
+| Algorithm | Total Reward | Episode Length |
+|---|---:|---:|
+| SARSA | -17 | 17 steps |
+| Q-Learning | -13 | 13 steps |
 
-**Episode Length: 17 steps**
-
-The trained agent successfully reached the goal in the CliffWalking environment.
+The results represent the recorded evaluation runs. Rewards may vary across runs because of randomness during training.
 
 ## Key Learnings
-- Understanding on-policy Temporal Difference learning
-- Implementing SARSA from scratch
+- Understanding Temporal Difference learning
+- Implementing SARSA and Q-Learning
+- Understanding on-policy and off-policy learning
 - Working with Q-tables
-- Understanding exploration and exploitation
-- Learning the ε-greedy policy
-- Training and evaluating an agent using Gymnasium
+- Balancing exploration and exploitation using ε-greedy policy
+- Training and evaluating agents in Gymnasium
 
 ## Conclusion
-This project provided practical experience in Reinforcement Learning by implementing the SARSA algorithm and training an agent to navigate the CliffWalking environment using Q-value updates and an ε-greedy policy.
+This project provided practical experience in Reinforcement Learning by implementing and evaluating SARSA and Q-Learning in the CliffWalking environment. It helped demonstrate the difference between on-policy and off-policy learning through their Q-value update strategies.
+
+## Notebooks
+- `sarsa.ipynb` – SARSA implementation and evaluation
+- `q_learning.ipynb` – Q-Learning implementation and evaluation
